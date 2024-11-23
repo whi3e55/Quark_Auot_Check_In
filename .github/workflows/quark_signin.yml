@@ -24,5 +24,6 @@ jobs:
       - name: Run Quark Sign-in
         env:
           COOKIE_QUARK: ${{ secrets.COOKIE_QUARK }}
+          DINGTALK_ACCESS_TOKEN: ${{ secrets.DINGTALK_ACCESS_TOKEN }}
         run: |
           python checkIn_Quark.py
