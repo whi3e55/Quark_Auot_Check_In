@@ -23,6 +23,32 @@ def get_env():
         sys.exit(0) 
 
     return cookie_list 
+# 发送钉钉通知
+def send_dingtalk_notification(content):
+    access_token = os.getenv("DINGTALK_ACCESS_TOKEN")
+    if not access_token:
+        print("❌ 未配置钉钉 Access Token")
+        send('夸克自动签到', '❌ 未配置钉钉 Access Token')
+        return False
+
+    url = f"https://oapi.dingtalk.com/robot/send?access_token={access_token}"
+    headers = {"Content-Type": "application/json"}
+    payload = {
+        "msgtype": "text",
+        "text": {"content": content}
+    }
+
+    try:
+        response = requests.post(url, headers=headers, json=payload)
+        if response.status_code == 200:
+            print("✅ 钉钉通知发送成功")
+            return True
+        else:
+            print(f"❌ 钉钉通知发送失败: {response.status_code} - {response.text}")
+            return False
+    except Exception as e:
+        print(f"❌ 钉钉通知发送异常: {str(e)}")
+        return False
 
 # 其他代码...
 
@@ -176,6 +202,8 @@ def main():
 
     try:
         send('夸克自动签到', msg)
+         # 添加钉钉通知
+        send_dingtalk_notification(msg)
     except Exception as err:
         print('%s\n❌ 错误，请查看运行日志！' % err)
 
