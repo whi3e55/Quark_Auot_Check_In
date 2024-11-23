@@ -51,6 +51,13 @@
 1. 进入 **Actions** 选项卡，点击 `Quark Sign-in`。
 2. 点击右侧的 **Run workflow**，手动触发一次签到任务，检查是否成功运行。
 
+### 5. 钉钉推送通知
+
+   - 打开你的 Fork 仓库，进入 **Settings -> Secrets and variables -> Actions**。
+   - 点击 **New repository secret** 按钮，创建一个名为 `DINGTALK_ACCESS_TOKEN` 的 Secret。
+   - 创建钉钉自定义机器人，url中的 `access_token=` 后面的 `xxx` 为值      (注： 没进行加签处理，请创建机器人时选择自定义关键词，并设置关键词为`签到`)
+
+     
 ### 常见问题
 
 - **签到失败或错误提示**：确认 Cookie 信息准确无误，且格式正确（`user=xxx; kps=xxx; sign=xxx;`）。
